@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <h2 class="mb-4 text-center align-items-center">Booking</h2>
+
+  <div class="row">
+    <form class="row">
+      <div class="input-group mb-3 col-12">
+        <input type="text" class="form-control" placeholder="PatientName/PhoneNumber" aria-label="PatientName/PhoneNumber" aria-describedby="basic-addon1">
+      </div>
+      <div class="col-12">
+        <div class="card" style="width: 18rem;z-index: -1;">
+          <div class="card-body">
+            <h5 class="card-title">ahmed mohamed</h5>
+            <div class="card-text row">
+              <div class="col-6">
+                <p>Age: 40</p>
+              </div>
+              <div class="col-6">
+                <p>Gender: Male</p>
+              </div>
+              <div class="col-6">
+                <p>Phone: 0123456789</p>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-success">Select</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+    <form class="row bookingForm">
+      <!-- Specialization Field -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label">Specialization</label>
+        <select class="form-select specializationSelection" aria-label="Select specialization">
+          <option selected>Open this select menu</option>
+          <option value="Neurology">Neurology</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Surgery">Surgery</option>
+        </select>
+      </div>
+
+      <!-- Doctor Field -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label">Which Doctor</label>
+        <select class="form-select doctorSelection" aria-label="Select doctor">
+          <option selected>Open this select menu</option>
+        </select>
+      </div>
+      <!-- choose date -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label">Choose Date</label>
+        <select class="form-select dateSelection" aria-label="Select doctor">
+          <option selected>Open this select menu</option>
+        </select>
+      </div>
+
+      <!-- Available Time Field -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label">Available Time</label>
+        <select class="form-select timeSelection" aria-label="Select available time">
+          <option selected>Open this select menu</option>
+        </select>
+      </div>
+
+
+      <!-- Service Field -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label">Service</label>
+        <select class="form-select" aria-label="Select service">
+          <option selected>Open this select menu</option>
+          <option value="Consultation">Consultation</option>
+          <option value="Surgery">Surgery</option>
+          <option value="Follow-up">Follow-up</option>
+        </select>
+      </div>
+
+
+      <!-- Submit Button -->
+      <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>

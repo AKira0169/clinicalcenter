@@ -1,0 +1,23 @@
+<nav class="navbar  sticky-top w-100 rounded">
+  <div class="container-fluid">
+    <span class="navbar-brand "> Splash </span>
+
+
+    <div class="d-flex align-items-center justify-content-center row ">
+      <div class="col-4 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+        <div class="notification d-flex align-items-center justify-content-center mx-3 mr-0 notificationshake">
+          <i class="fa-solid fa-bell fa-2x"></i>
+          <span class="ntf-nm" id="notificationCount">2</span>
+        </div>
+      </div>
+      <div class="col-8 d-flex align-items-center justify-content-center gap-2">
+        <a href="#" class="d-flex align-items-center gap-2">
+          <span class=" fw-bold">oday</span>
+          <img src="images/default.jpg" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" alt="User">
+        </a>
+      </div>
+    </div>
+  </div>
+
+</nav>
+<%- include('notification.ejs')%>

@@ -6,6 +6,10 @@ const { getIo } = require('../../config/socket');
 
 // Create Inventory Item
 exports.createItem = catchAsync(async (req, res, next) => {
+  if (!req.body.price || !req.body.quantity || !req.body.name || !req.body.description || !req.body.category) {
+    return next(new AppError('Please provide all required fields', 400));
+  }
+
   const item = await Inventory.create(req.body);
   if (!item) {
     return next(new AppError('Failed to create inventory item', 500));

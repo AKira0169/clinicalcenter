@@ -16,13 +16,10 @@ const processAndUploadImages = folder => async (req, res, next) => {
   try {
     // Process each file in the array
     const uploadPromises = files.map(async file => {
-      const clinicID = req.user.clinicID._id.toString();
       const uniqueId = uuidv4();
       const fileNameWithoutExtension = file.originalname.split('.')[0];
       const fileExtension = 'jpg'; // Convert to jpg or keep the original extension
-      // Create a file key with ClinicID as a prefix
-      const clinicIdPrefix = `${clinicID}/`; // Prefix with ClinicID
-      const fileKey = `${folder}/${clinicIdPrefix}${fileNameWithoutExtension}-${uniqueId}.${fileExtension}`;
+      const fileKey = `${folder}/${fileNameWithoutExtension}-${uniqueId}.${fileExtension}`;
 
       // Resize the image and reduce its quality
       const imageBuffer = await sharp(file.buffer)
@@ -37,7 +34,6 @@ const processAndUploadImages = folder => async (req, res, next) => {
           Body: imageBuffer,
           ACL: 'private', // Adjust as needed
           CacheControl: 'max-age=31536000', // Cache for 1 year,
-          Tagging: `ClinicID=${clinicID}`, // Tag the file with the clinic's ID
         }),
       );
 

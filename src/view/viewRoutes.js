@@ -4,6 +4,9 @@ const authenticationController = require('../../Middleware/authenticationControl
 
 const router = express.Router();
 
+router.get('/', viewController.home);
+router.get('/inventory', viewController.inventory);
+router.get('/inventoryLogs', viewController.inventoryLogs);
 router.get('/Booking', viewController.bookingPage);
 router.get('/booked', viewController.bookedPage);
 router.get('/Queue', viewController.queuePage);

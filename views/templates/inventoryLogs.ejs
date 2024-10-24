@@ -1,0 +1,67 @@
+<div class="container-fluid text-center align-items-center justify-content-center">
+  <h1 class="text-center">Inventory Logs</h1>
+  <h3 class="text-start"><span>total Logs:</span><%= totalItems%></h3>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">User</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+            <th scope="col">reason</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <%inventoryLogs.forEach((item) => {%>
+          <tr>
+            <td><%=item.createdAt.toISOString().split('T')[0]%></td>
+            <td><%=item.user.name%></td>
+            <td><img class="img-inventory" src="/images/default.jpg" alt="photo"></td>
+            <td><%=item.itemName%></td>
+            <td><%=item.itemDescription%></td>
+            <td><%=item.quantity%></td>
+            <td><%=item.itemPrice%></td>
+            <td><%=item.action%></td>
+            <td><%=item.reason%></td>
+
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+
+
+
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <!-- Previous Page -->
+        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>">Previous</a>
+        </li>
+
+        <!-- Page Numbers -->
+        <% for(let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %>
+
+        <!-- Next Page -->
+        <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

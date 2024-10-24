@@ -6,8 +6,9 @@ const { processAndUploadImages } = require('../../Middleware/upLoadImage');
 
 const router = express.Router();
 const protectRoutes = [authenticationController.protect];
-router.use(protectRoutes);
-router.post('/', upload.single('item'), processAndUploadImages('item'), inventoryController.createItem);
+// router.use(protectRoutes);
+// processAndUploadImages('photo'),
+router.post('/', upload.single('photo'), inventoryController.createItem);
 router.get('/', inventoryController.getAllItems);
 router.patch('/:id', inventoryController.updateItem);
 router.delete('/:id', inventoryController.deleteItem);

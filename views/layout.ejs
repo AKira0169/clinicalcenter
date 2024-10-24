@@ -14,49 +14,7 @@
 
 <body>
 
-  <nav class="navbar navbar-dark bg-dark navbar-expand-lg main-nav   sticky-top  ">
-    <div class="container-fluid">
-      <span class="navbar-brand text-info"> clinical Solutions </span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link  " aria-current="page" href="/">
-              Home
-            </a>
-          </li>
-
-
-        </ul>
-
-        <div class="d-flex align-items-center justify-content-center row ">
-          <div class="col-4 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-            <div class="notification d-flex align-items-center justify-content-center mx-3 mr-0 notificationshake">
-              <div class="position-relative d-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#BB271A">
-                  <path d="M160-200v-60h80v-304q0-84 49.5-150.5T420-798v-22q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v22q81 17 130.5 83.5T720-564v304h80v60H160Zm320-302Zm0 422q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM300-260h360v-304q0-75-52.5-127.5T480-744q-75 0-127.5 52.5T300-564v304Z" />
-                </svg>
-                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger" id="notificationCount">3</span>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-8 d-flex align-items-center justify-content-center gap-2">
-            <button type="button" class="btn btn-outline-info btn-main Logoutbtn">Logout</button>
-
-            <a href="/accountMangment" class="d-flex align-items-center gap-2">
-              <span class="text-light">oday</span>
-              <img src="/images/default.jpg" class="rounded-circle img-fluid user-nav-img">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <%- include ('./components/Navbar.ejs')%>
 
   <%- include('./components/Header.ejs') %>
 

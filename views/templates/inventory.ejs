@@ -1,0 +1,100 @@
+<div class="container-fluid text-center align-items-center justify-content-center">
+  <h1>Inventory</h1>
+  <div class="row justify-content-center">
+    <form class="" id="inventoryForm">
+      <div class="mb-3">
+        <input type="text" class="form-control" name="name" placeholder="Name" aria-label="Name">
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="description" placeholder="Description" aria-label="Description">
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label text-start">Category</label>
+        <select id="category" name="category" class="form-select">
+          <option selected value="">Open this select menu</option>
+          <option value="1">Category One</option>
+          <option value="2">Category Two</option>
+          <option value="3">Category Three</option>
+        </select>
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <input type="number" class="form-control" name="quantity" placeholder="Quantity" aria-label="Quantity">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" name="price" placeholder="Price" aria-label="Price">
+        </div>
+      </div>
+      <div class="mb-3">
+        <input type="file" class="form-control" name="photo" placeholder="Photo" aria-label="Photo">
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+  </div>
+
+  <hr>
+
+
+  <h3 class="text-start"><span>total Items:</span><%= totalItems%></h3>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%inventory.forEach((item) => {%>
+          <tr>
+            <td><img class="img-inventory" src="/images/default.jpg" alt="photo"></td>
+            <td><%=item.name%></td>
+            <td><%=item.description%></td>
+            <td><%=item.quantity%></td>
+            <td><%=item.price%></td>
+            <td><a class="btn btn-outline-info" href="/inventory/edit/<%=item._id%>">Edit</a>
+              <a class="btn btn-outline-danger" href="/inventory/delete/<%=item._id%>">Delete</a>
+            </td>
+
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+
+
+
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <!-- Previous Page -->
+        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>">Previous</a>
+        </li>
+
+        <!-- Page Numbers -->
+        <% for(let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %>
+
+        <!-- Next Page -->
+        <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

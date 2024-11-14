@@ -6,26 +6,21 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 
 exports.bookPatientAppointment = catchAsync(async (req, res, next) => {
-  const { doctorId, date, patientId, appointmentStartTime: startTime, note } = req.body;
-
+  const { doctorId, date, patientId, startTime, note } = req.body;
   // Validate inputs
   if (!doctorId || !date || !patientId || !startTime) {
     return next(
       new AppError('Please provide all the required fields: doctorId, date, patientId, and appointmentStartTime', 400),
     );
   }
-
   // Find the doctor's schedule for the selected date
   const doctorSchedule = await DoctorSchedule.findOne({ doctorId, date: new Date(date) });
-
   if (!doctorSchedule) {
     return next(new AppError('No schedule found for the doctor on the selected date', 404));
   }
-
   // Convert appointment start time to a Date object and automatically calculate the end time (10 minutes later)
   const appointmentStartTime = new Date(`${doctorSchedule.date.toISOString().split('T')[0]}T${startTime}:00.000Z`);
   const appointmentEndTime = new Date(appointmentStartTime.getTime() + 10 * 60 * 1000); // Add 10 minutes
-
   const availableStartTime = new Date(doctorSchedule.availableStartTime);
   const availableEndTime = new Date(doctorSchedule.availableEndTime);
 
@@ -38,7 +33,6 @@ exports.bookPatientAppointment = catchAsync(async (req, res, next) => {
   const isTimeSlotBooked = await Promise.all(
     doctorSchedule.bookings.map(async bookingId => {
       const booking = await Booking.findById(bookingId);
-
       // Convert existing booking times to Date objects
       const existingStartTime = new Date(booking.appointmentStartTime);
       const existingEndTime = new Date(booking.appointmentEndTime);
@@ -110,6 +104,7 @@ exports.getAvailableSlots = catchAsync(async (req, res, next) => {
   }));
 
   // Generate available time slots
+  console.log(availableStartTime, availableEndTime, bookedSlots);
   const availableSlots = generateTimeSlots(availableStartTime, availableEndTime, bookedSlots);
 
   // Return the available slots
@@ -150,7 +145,6 @@ exports.createBooking = catchAsync(async (req, res, next) => {
     return next(new AppError('This date is already taken', 409));
   }
   req.body.clinic = req.user.clinicID;
-  console.log(req.body);
   const booking = await Booking.create(req.body);
   if (booking.status === 'inQueue') {
     await booking.populate('service');

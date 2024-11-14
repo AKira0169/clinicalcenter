@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <form id="searchForm">
+    <div class="row">
+      <div class="mb-5 d-flex justify-content-center">
+        <input type="text" class="form-control text-center rounded-5 fs-4" placeholder="Search" id="search" />
+      </div>
+    </div>
+  </form>
+  <h2 class="mb-4 text-center align-items-center">Patient List</h2>
+  <div class="row" id="patientList">
+    <% patients .forEach(patient => { %>
+
+    <div class="card col-sm-12 col-md-2 " style="width: 18rem;">
+      <div class="card-body align-items-center justify-content-center">
+        <h5 class="card-title"><%= patient.name %></h5>
+        <p class="card-text">Age: <%= patient.age %></p>
+        <p class="card-text">Serial: <%= patient.serial %></p>
+        <p class="card-text">Phone: <%= patient.phoneNumber %></p>
+        <p class="card-text">Second Phone: <%= patient.secondNumber %></p>
+        <p class="card-text">Gender: <%= patient.sex   %></p>
+        <button class="btn btn-primary ">Visit</button>
+      </div>
+    </div>
+
+    <%})%>
+
+  </div>
+  <div class="row justify-content-center align-items-center mt-5">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <!-- Previous Page -->
+        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>">Previous</a>
+        </li>
+
+        <!-- Page Numbers -->
+        <% for(let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %>
+
+        <!-- Next Page -->
+        <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

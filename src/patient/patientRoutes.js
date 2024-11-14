@@ -5,7 +5,7 @@ const authenticationController = require('../../Middleware/authenticationControl
 
 const router = express.Router();
 const protectRoutes = [authenticationController.protect];
-// router.use(protectRoutes);
+router.use(protectRoutes);
 router.post('/get-patient', patientController.getSpatient);
 // router.post('/get-patientt', patientController.getPatientt);
 // router.post('/get-Patienttt', patientController.getPatienttt);

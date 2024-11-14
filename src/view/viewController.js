@@ -4,7 +4,6 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const { listObjects } = require('../../Middleware/trackClinicStorage');
 const { generatePresignedUrl } = require('../../utils/generatePresignedUrl');
-
 const Inventory = require('../inventory/inventoryModel');
 const InventoryLogs = require('../inventoryLogs/inventoryLogsModel');
 const Patient = require('../patient/patientModel');
@@ -134,5 +133,59 @@ exports.patientPage = catchAsync(async (req, res, next) => {
   res.render('layout', {
     title: 'Patient',
     body: 'patient',
+  });
+});
+exports.patientList = catchAsync(async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1; // Current page (default to 1)
+  const limit = parseInt(req.query.limit) || 10; // Items per page (default to 10)
+  const skip = (page - 1) * limit;
+  const search = req.query.search || '';
+
+  try {
+    const patients = await Patient.aggregate([
+      {
+        $match: {
+          $or: [
+            { name: { $regex: search, $options: 'i' } },
+            { serial: { $regex: search, $options: 'i' } },
+            { phoneNumber: { $regex: search, $options: 'i' } },
+          ],
+        },
+      },
+      { $skip: skip },
+      { $limit: limit },
+    ]);
+
+    // Optional: Get total count of matching patients for pagination
+    const totalPatients = await Patient.countDocuments({
+      $or: [
+        { name: { $regex: search, $options: 'i' } },
+        { serial: { $regex: search, $options: 'i' } },
+        { phoneNumber: { $regex: search, $options: 'i' } },
+      ],
+    });
+
+    // Calculate total pages
+    const totalPages = Math.ceil(totalPatients / limit);
+
+    console.log(patients);
+    res.render('layout', {
+      title: 'Patient List',
+      body: 'patientList',
+      patients,
+      currentPage: page,
+      totalPages,
+      totalPatients,
+    });
+  } catch (error) {
+    console.error('Error fetching patients:', error);
+    // Handle the error, e.g., send an error response
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+exports.loginPage = catchAsync(async (req, res, next) => {
+  res.render('login', {
+    title: 'Login',
   });
 });

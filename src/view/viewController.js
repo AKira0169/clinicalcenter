@@ -18,6 +18,7 @@ const PatientRecord = require('../patientRecord/patientRecordModel');
 const Statistics = require('../statistics/statisticsModel');
 const PreScription = require('../prescription/prescriptionModel');
 const Video = require('../video/videoModel');
+const getOrSetCache = require('../../Middleware/getOrSetCache');
 
 const DateConvertorr = date => (date ? new Date(date).toLocaleString('en-US', { month: 'long' }) : 'NO DATE');
 

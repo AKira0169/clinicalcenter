@@ -2,6 +2,7 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const Inventory = require('./inventoryModel');
 const InventoryLogs = require('../inventoryLogs/inventoryLogsModel');
+const getOrSetCache = require('../../Middleware/getOrSetCache');
 const { getIo } = require('../../config/socket');
 
 // Create Inventory Item
@@ -122,7 +123,12 @@ exports.deleteItem = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllItems = catchAsync(async (req, res, next) => {
-  const items = await Inventory.find();
+  const items = await getOrSetCache('allInventory', async () => {
+    const data = await fetch('https://datausa.io/api/data?drilldowns=Nation&measures=Population');
+    return data.json();
+  });
+
+  // Send response with the retrieved items
   res.status(200).json({
     status: 'success',
     data: items,
